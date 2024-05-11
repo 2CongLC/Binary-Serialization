@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Text
 
 Public Class SerializationManager(Of t As Class)
 
@@ -53,5 +54,5 @@ Public Class SerializationManager(Of t As Class)
         Return obj
 
     End Function
-        
+
 End Class
