@@ -28,31 +28,5 @@ Public Class SerializationManager(Of t As Class)
     End Sub
 
 
-    <Obsolete>
-    Public Shared Function BinarySerialize(ByVal obj As t) As String
-
-        Dim _outms As MemoryStream = New MemoryStream()
-        Dim binaryFormatter As New BinaryFormatter()
-        Try
-            binaryFormatter.Serialize(_outms, obj)
-        Catch ex As Exception
-        End Try
-        Return Encoding.UTF8.GetString(_outms.ToArray())
-
-    End Function
-
-    <Obsolete>
-    Public Shared Function BinaryDeSerialize(ByVal value As String) As t
-
-        Dim _inms As MemoryStream = New MemoryStream(Encoding.UTF8.GetBytes(value))
-        Dim binaryFormatter As New BinaryFormatter()
-        Dim obj As t = Nothing
-        Try
-            obj = DirectCast(binaryFormatter.Deserialize(_inms), t)
-        Catch ex As Exception
-        End Try
-        Return obj
-
-    End Function
 
 End Class

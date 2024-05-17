@@ -30,8 +30,6 @@ Partial Class Form1
         TextBox2 = New TextBox()
         Button3 = New Button()
         Button4 = New Button()
-        Button5 = New Button()
-        Button6 = New Button()
         SuspendLayout()
         ' 
         ' Button1
@@ -76,47 +74,27 @@ Partial Class Form1
         ' 
         ' Button3
         ' 
-        Button3.Location = New Point(427, 179)
+        Button3.Location = New Point(106, 306)
         Button3.Name = "Button3"
-        Button3.Size = New Size(213, 23)
+        Button3.Size = New Size(75, 23)
         Button3.TabIndex = 4
-        Button3.Text = "Encoder"
+        Button3.Text = "Button3"
         Button3.UseVisualStyleBackColor = True
         ' 
         ' Button4
         ' 
-        Button4.Location = New Point(427, 208)
+        Button4.Location = New Point(106, 335)
         Button4.Name = "Button4"
-        Button4.Size = New Size(213, 23)
+        Button4.Size = New Size(75, 23)
         Button4.TabIndex = 5
-        Button4.Text = "Decoder"
+        Button4.Text = "Button4"
         Button4.UseVisualStyleBackColor = True
-        ' 
-        ' Button5
-        ' 
-        Button5.Location = New Point(427, 273)
-        Button5.Name = "Button5"
-        Button5.Size = New Size(213, 23)
-        Button5.TabIndex = 6
-        Button5.Text = "Button5"
-        Button5.UseVisualStyleBackColor = True
-        ' 
-        ' Button6
-        ' 
-        Button6.Location = New Point(427, 302)
-        Button6.Name = "Button6"
-        Button6.Size = New Size(213, 23)
-        Button6.TabIndex = 7
-        Button6.Text = "Button6"
-        Button6.UseVisualStyleBackColor = True
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
-        Controls.Add(Button6)
-        Controls.Add(Button5)
         Controls.Add(Button4)
         Controls.Add(Button3)
         Controls.Add(TextBox2)
@@ -137,7 +115,5 @@ Partial Class Form1
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Button3 As Button
     Friend WithEvents Button4 As Button
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button6 As Button
 
 End Class

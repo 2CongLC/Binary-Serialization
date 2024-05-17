@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports System.Runtime.Serialization
 Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.Text
 
@@ -47,41 +48,23 @@ Public Class Form1
         Try
             If OpenFileDialog1.ShowDialog = DialogResult.OK AndAlso SaveFileDialog1.ShowDialog = DialogResult.OK Then
 
-                Dim obj As String = File.ReadAllText(OpenFileDialog1.FileName)
-                SerializationManager(Of String).WriteToBinFile(SaveFileDialog1.FileName, obj)
+                Dim a = File.ReadAllText(OpenFileDialog1.FileName)
+                SerializationManager(Of String).WriteToBinFile(SaveFileDialog1.FileName, a)
                 MessageBox.Show("ok")
             End If
+
         Catch ex As Exception
             MessageBox.Show(ex.ToString)
+
         End Try
     End Sub
-
     <Obsolete>
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Try
             If OpenFileDialog1.ShowDialog = DialogResult.OK AndAlso SaveFileDialog1.ShowDialog = DialogResult.OK Then
 
-                Dim obj As String = SerializationManager(Of String).ReadFromBinFile(OpenFileDialog1.FileName)
-                File.WriteAllText(SaveFileDialog1.FileName, obj)
-                MessageBox.Show("ok")
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString)
-        End Try
-    End Sub
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
-    <Obsolete>
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Try
-            If OpenFileDialog1.ShowDialog = DialogResult.OK AndAlso SaveFileDialog1.ShowDialog = DialogResult.OK Then
-
-                Dim obj As String = File.ReadAllText(OpenFileDialog1.FileName)
-                Dim bs As String = BinarySerialize(Of String)(obj)
-                File.WriteAllText(SaveFileDialog1.FileName, bs)
+                Dim a As String = SerializationManager(Of String).ReadFromBinFile(OpenFileDialog1.FileName)
+                File.WriteAllText(SaveFileDialog1.FileName, a)
                 MessageBox.Show("ok")
             End If
         Catch ex As Exception
@@ -91,37 +74,24 @@ Public Class Form1
     End Sub
 
     <Obsolete>
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        Try
-            If OpenFileDialog1.ShowDialog = DialogResult.OK AndAlso SaveFileDialog1.ShowDialog = DialogResult.OK Then
-
-                Dim obj As String = File.ReadAllText(OpenFileDialog1.FileName)
-                Dim bs As String = BinaryDeSerialize(Of String)(obj)
-                File.WriteAllText(SaveFileDialog1.FileName, bs)
-                MessageBox.Show("ok")
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.ToString)
-        End Try
-
-    End Sub
-
-    <Obsolete>
-    Public Function BinarySerialize(Of t)(ByVal obj As t) As String
-        Dim _outms As MemoryStream = New MemoryStream()
-        Dim binaryFormatter As New BinaryFormatter()
-        binaryFormatter.Serialize(_outms, obj)
-        Return Encoding.UTF8.GetString(_outms.ToArray())
+    Public Function SerializeBIN(Of T)(obj As T) As Byte()
+        Using memStream As New MemoryStream()
+            Dim binSerializer As New BinaryFormatter()
+            binSerializer.Serialize(memStream, obj)
+            Return memStream.ToArray()
+        End Using
     End Function
 
     <Obsolete>
-    Public Function BinaryDeSerialize(Of t)(ByVal value As String) As t
-
-        Dim binaryFormatter As New BinaryFormatter()
-        Dim obj As t = Nothing
-        obj = DirectCast(binaryFormatter.Deserialize(, t)
+    Public Function DeserializeBIN(Of T)(serializedObj As Byte()) As T
+        Dim obj As T = Nothing
+        Using memStream As New MemoryStream(serializedObj)
+            Dim binSerializer As New BinaryFormatter()
+            obj = DirectCast(binSerializer.Deserialize(memStream), T)
+        End Using
         Return obj
     End Function
+
 
 
 
