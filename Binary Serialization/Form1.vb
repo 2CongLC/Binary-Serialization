@@ -72,6 +72,36 @@ Public Class Form1
         End Try
 
     End Sub
+    <Obsolete>
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Try
+            If OpenFileDialog1.ShowDialog = DialogResult.OK AndAlso SaveFileDialog1.ShowDialog = DialogResult.OK Then
+
+                Dim a As Byte() = SerializeBIN(Of String)(File.ReadAllText(OpenFileDialog1.FileName))
+                File.WriteAllBytes(SaveFileDialog1.FileName, a)
+                MessageBox.Show("ok")
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+
+        End Try
+    End Sub
+    <Obsolete>
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Try
+            If OpenFileDialog1.ShowDialog = DialogResult.OK AndAlso SaveFileDialog1.ShowDialog = DialogResult.OK Then
+
+                Dim a As String = DeserializeBIN(Of String)(File.ReadAllBytes(OpenFileDialog1.FileName))
+                File.WriteAllText(SaveFileDialog1.FileName, a)
+                MessageBox.Show("ok")
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show(ex.ToString)
+
+        End Try
+    End Sub
 
     <Obsolete>
     Public Function SerializeBIN(Of T)(obj As T) As Byte()
