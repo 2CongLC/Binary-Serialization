@@ -122,6 +122,26 @@ Public Class Form1
         Return obj
     End Function
 
+Public Function Serializer(ByVal obj As t) As Byte()
+    Dim bytes As Byte()
+    Using _MemoryStream As New MemoryStream()
+        Dim _BinaryFormatter As IFormatter = New BinaryFormatter()
+        _BinaryFormatter.Serialize(_MemoryStream, obj)
+        bytes = _MemoryStream.ToArray()
+    End Using
+    Return bytes
+End Function
+
+Public  Function Deserializer(Of T)(Byval Bytes as Byte()) As T
+    Dim ReturnValue As T
+   
+    Using _MemoryStream As New MemoryStream(Bytes)
+        Dim _BinaryFormatter As IFormatter = New BinaryFormatter()
+        ReturnValue = CType(_BinaryFormatter.Deserialize(_MemoryStream), T)
+    End Using
+    Return ReturnValue
+End Function
+
 
 
 
