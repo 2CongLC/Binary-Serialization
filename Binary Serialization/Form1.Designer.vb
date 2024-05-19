@@ -98,7 +98,7 @@ Partial Class Form1
         Button5.Name = "Button5"
         Button5.Size = New Size(176, 23)
         Button5.TabIndex = 6
-        Button5.Text = "Button5"
+        Button5.Text = "Serializer Memory"
         Button5.UseVisualStyleBackColor = True
         ' 
         ' Button6
@@ -107,7 +107,7 @@ Partial Class Form1
         Button6.Name = "Button6"
         Button6.Size = New Size(176, 23)
         Button6.TabIndex = 7
-        Button6.Text = "Button6"
+        Button6.Text = "DeSerializer Memory"
         Button6.UseVisualStyleBackColor = True
         ' 
         ' Form1
@@ -123,7 +123,10 @@ Partial Class Form1
         Controls.Add(TextBox1)
         Controls.Add(Button2)
         Controls.Add(Button1)
+        FormBorderStyle = FormBorderStyle.FixedSingle
+        MaximizeBox = False
         Name = "Form1"
+        StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
         ResumeLayout(False)
         PerformLayout()

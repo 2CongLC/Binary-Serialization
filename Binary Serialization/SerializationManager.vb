@@ -26,7 +26,4 @@ Public Class SerializationManager(Of t As Class)
             End If
         End Try
     End Sub
-
-
-
 End Class

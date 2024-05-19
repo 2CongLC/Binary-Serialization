@@ -77,7 +77,7 @@ Public Class Form1
         Try
             If OpenFileDialog1.ShowDialog = DialogResult.OK AndAlso SaveFileDialog1.ShowDialog = DialogResult.OK Then
 
-                Dim a As Byte() = SerializeBIN(Of String)(File.ReadAllText(OpenFileDialog1.FileName))
+                Dim a As Byte() = SerializeBinary(Of String)(File.ReadAllText(OpenFileDialog1.FileName))
                 File.WriteAllBytes(SaveFileDialog1.FileName, a)
                 MessageBox.Show("ok")
             End If
@@ -92,7 +92,7 @@ Public Class Form1
         Try
             If OpenFileDialog1.ShowDialog = DialogResult.OK AndAlso SaveFileDialog1.ShowDialog = DialogResult.OK Then
 
-                Dim a As String = DeserializeBIN(Of String)(File.ReadAllBytes(OpenFileDialog1.FileName))
+                Dim a As String = DeserializeBinary(Of String)(File.ReadAllBytes(OpenFileDialog1.FileName))
                 File.WriteAllText(SaveFileDialog1.FileName, a)
                 MessageBox.Show("ok")
             End If
@@ -104,7 +104,7 @@ Public Class Form1
     End Sub
 
     <Obsolete>
-    Public Function SerializeBIN(Of T)(obj As T) As Byte()
+    Public Function SerializeBinary(Of T)(obj As T) As Byte()
         Using memStream As New MemoryStream()
             Dim binSerializer As New BinaryFormatter()
             binSerializer.Serialize(memStream, obj)
@@ -113,7 +113,7 @@ Public Class Form1
     End Function
 
     <Obsolete>
-    Public Function DeserializeBIN(Of T)(serializedObj As Byte()) As T
+    Public Function DeserializeBinary(Of T)(serializedObj As Byte()) As T
         Dim obj As T = Nothing
         Using memStream As New MemoryStream(serializedObj)
             Dim binSerializer As New BinaryFormatter()
@@ -122,25 +122,6 @@ Public Class Form1
         Return obj
     End Function
 
-    Public Function Serializer(ByVal obj As t) As Byte()
-        Dim bytes As Byte()
-        Using _MemoryStream As New MemoryStream()
-            Dim _BinaryFormatter As IFormatter = New BinaryFormatter()
-            _BinaryFormatter.Serialize(_MemoryStream, obj)
-            bytes = _MemoryStream.ToArray()
-        End Using
-        Return bytes
-    End Function
-
-    Public Function Deserializer(Of T)(ByVal Bytes As Byte()) As T
-        Dim ReturnValue As T
-
-        Using _MemoryStream As New MemoryStream(Bytes)
-            Dim _BinaryFormatter As IFormatter = New BinaryFormatter()
-            ReturnValue = CType(_BinaryFormatter.Deserialize(_MemoryStream), T)
-        End Using
-        Return ReturnValue
-    End Function
 
 
 
